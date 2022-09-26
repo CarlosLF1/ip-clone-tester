@@ -31,12 +31,21 @@ const IpAddress = () => {
                 <>
                     <div className={classes.info}>
                         <p>
-                            <span className={classes.bold}></span>
+                            <span className={classes.bold}>Public IPv4 Address: </span>
+                            {ipAddressDict?.ip}
+                        </p>
+                        <p>
+                            <span className={classes.bold}>Internet Service Provider: </span>
+                            {ipAddressDict?.isp}
+                        </p>
+                        <p>
+                            <span className={classes.bold}>Location: </span>
+                            {ipAddressDict?.location?.region}, {ipAddressDict?.location?.country}
                         </p>
                     </div>
                 </>
             )}
-            <h1>{ipAddressDict.ip}</h1>
+            
             {httpError && <p>{httpError}</p>}
         </div>
     );
