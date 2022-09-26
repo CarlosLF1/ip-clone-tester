@@ -1,4 +1,4 @@
-import IpAddress from "./components/IpAddress";
+import IpAddress from "./components/IP/IpAddress";
 import Card from "./UI/Card"
 
 function App() {
