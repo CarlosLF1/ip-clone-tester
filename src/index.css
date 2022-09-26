@@ -6,9 +6,10 @@ body {
   margin: 0;
   padding: 0;
   background: url('https://source.unsplash.com/1L71sPT5XKc');
-  color: #333;
+  color: #fff;
   display: flex;
   justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 
