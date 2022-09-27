@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
 import classes from "./IpAddress.module.css";
+import LocationMap from "../LocationMap";
 
 const IpAddress = () => {
     const [ipAddressDict, setIpAddressDict] = useState({})
     const [httpError, setHttpError] = useState(null)
 
     useEffect(() => {
-        fetch("https://geo.ipify.org/api/v2/country?apiKey=at_NKD1wQqlIyem5WXhpNc88I0RFs7MT&ipAddress=")
+        fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_NKD1wQqlIyem5WXhpNc88I0RFs7MT&ipAddress=")
             .then((res) => {
                 if (res.ok) {
                 setHttpError(null)
@@ -40,10 +41,12 @@ const IpAddress = () => {
                         </p>
                         <p>
                             <span className={classes.bold}>Location: </span>
-                            {ipAddressDict?.location?.region}, {ipAddressDict?.location?.country}
+                            {ipAddressDict?.location?.city}, {ipAddressDict?.location?.country}
                         </p>
                     </div>
+                    <LocationMap lat={ipAddressDict?.location?.lat} lon={ipAddressDict?.location?.lng} />
                 </>
+                
             )}
             
             {httpError && <p>{httpError}</p>}
