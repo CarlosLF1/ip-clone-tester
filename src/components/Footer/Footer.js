@@ -11,7 +11,7 @@ export default function Footer() {
                 <ul className="max-w-screen-md mx-auto text-lg font-light flex flex-wrap justify-between">
                     <li className="my-2">
                         <button className="text-gray-400 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white transition-colors duration-200" href="/">
-                            Your info {myIp ? myIp.location.country : <></>}
+                            {/* Your info {myIp ? myIp.location.country : <></>} */}
                         </button>
                     </li>
                     <li className="my-2">
