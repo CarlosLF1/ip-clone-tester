@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-
 import classes from "./IpAddress.module.css";
-import LocationMap from "../LocationMap";
+// import LocationMap from "../LocationMap";
 
-const IpAddress = () => {
+export default function IpAddress() {
     const [ipAddressDict, setIpAddressDict] = useState({})
     const [httpError, setHttpError] = useState(null)
 
@@ -44,7 +43,7 @@ const IpAddress = () => {
                             {ipAddressDict?.location?.city}, {ipAddressDict?.location?.country}
                         </p>
                     </div>
-                    <LocationMap lat={ipAddressDict?.location?.lat} lon={ipAddressDict?.location?.lng} />
+                    {/* <LocationMap lat={ipAddressDict?.location?.lat} lon={ipAddressDict?.location?.lng} /> */}
                 </>
                 
             )}
@@ -54,4 +53,3 @@ const IpAddress = () => {
     );
 };
 
-export default IpAddress;

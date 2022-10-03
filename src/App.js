@@ -1,12 +1,16 @@
 import IpAddress from "./components/IP/IpAddress";
+// import LocationMap from "./components/LocationMap";
 import Card from "./UI/Card"
 
 function App() {
   return (
-    <Card>
+    <div>
+     <Card>
       <h1>Your IP address is ...</h1>
       <IpAddress />
-    </Card>
+     </Card>
+      {/* <LocationMap /> */}
+    </div>
   );
 }
 
