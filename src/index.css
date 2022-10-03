@@ -5,16 +5,19 @@
 
 * {
   font-family: sans-serif;
+  width: 100%
 }
 
 body {
   margin: 0;
   padding: 0;
+  height: 100vh;
   background: url('https://source.unsplash.com/1L71sPT5XKc');
   color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  background-repeat: inherit;
 }
 

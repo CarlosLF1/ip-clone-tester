@@ -3,53 +3,52 @@ import { setGlobalState } from "../State";
 import classes from "./IpAddress.module.css";
 // import LocationMap from "../LocationMap";
 
-export default function IpAddress() {
-    const [ipAddressDict, setIpAddressDict] = useState({})
-    const [httpError, setHttpError] = useState(null)
+export default function CountryInfo() {
+    const [country, setCountry] = useState({})
+    const [countryError, setCountryError] = useState(null)
 
     useEffect(() => {
-        fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_NKD1wQqlIyem5WXhpNc88I0RFs7MT&ipAddress=")
+        fetch("https://restcountries.com/v3.1/all")
             .then((res) => {
                 if (res.ok) {
-                setHttpError(null)
+                setCountryError(null)
                 return res.json();
             } else {
-                throw Error("Failed to fetch IP Address");
+                throw Error("Failed to find this country");
             }
             })
             .then((data) => {
                 console.log(data);
-                setGlobalState('ipAddress', data)
+                setGlobalState('countryInfo', data)
             })
             .catch((error) =>
-                setHttpError("Failed to retrieve IP Address, please try again later")
+                setCountryError("Failed to retrieve this country info, please try again later")
             );
     }, [])
 
     return (
         <div>
-            {!httpError && (
+            {!countryError && (
                 <>
                     <div className={classes.info}>
                         <p>
                             <span className={classes.bold}>Public IPv4 Address: </span>
-                            {ipAddressDict?.ip}
+                            {setCountry?.name.official}
                         </p>
                         <p>
                             <span className={classes.bold}>Internet Service Provider: </span>
-                            {ipAddressDict?.isp}
+                            {country?.isp}
                         </p>
                         <p>
                             <span className={classes.bold}>Location: </span>
-                            {ipAddressDict?.location?.city}, {ipAddressDict?.location?.country}
+                            {country?.location?.city}, {country?.location?.country}
                         </p>
                     </div>
                 </>
                 
             )}
             
-            {httpError && <p>{httpError}</p>}
+            {countryError && <p>{countryError}</p>}
         </div>
     );
 };
-
