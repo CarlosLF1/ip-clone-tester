@@ -20,7 +20,7 @@ export default function IpAddress() {
             .then((data) => {
                 console.log(data);
                 setIpAddressDict(data)
-                // setGlobalState('ipAddress', data)
+                setGlobalState('ipAddress', data)
             })
             .catch((error) =>
                 setHttpError("Failed to retrieve IP Address, please try again later")
