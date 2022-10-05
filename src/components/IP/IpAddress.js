@@ -19,7 +19,8 @@ export default function IpAddress() {
             })
             .then((data) => {
                 console.log(data);
-                setGlobalState('ipAddress', data)
+                setIpAddressDict(data)
+                // setGlobalState('ipAddress', data)
             })
             .catch((error) =>
                 setHttpError("Failed to retrieve IP Address, please try again later")
@@ -29,7 +30,7 @@ export default function IpAddress() {
     return (
        <div>
             {!httpError && (
-                <>
+                // <>
                     <div className={classes.info}>
                         <p>
                             <span className={classes.bold}>Public IPv4 Address: </span>
@@ -44,7 +45,7 @@ export default function IpAddress() {
                             {ipAddressDict?.location?.city}, {ipAddressDict?.location?.country}
                         </p>
                     </div>
-                </>
+                // </>
                 
             )}
             

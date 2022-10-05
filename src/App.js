@@ -1,5 +1,4 @@
 import IpAddress from "./components/IP/IpAddress";
-import Header from "./components/header/Header";
 // import LocationMap from "./components/LocationMap";
 import Card from "./UI/Card"
 import CountryInfo from "./components/IP/CountryInfo";
@@ -21,7 +20,7 @@ function App() {
           </React.StrictMode>
       </div>
       <div className='basis-1/2 p-4'>
-        <h3 className='bg-white m-auto mt-4 h-full p-1 rounded-lg'>Our map</h3>
+        <h3 className='bg-white m-auto mt-4 h-full p-1 rounded-lg'>Where are you?</h3>
       </div>
     </div>
   );

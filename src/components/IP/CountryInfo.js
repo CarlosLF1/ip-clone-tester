@@ -4,7 +4,7 @@ import classes from "./IpAddress.module.css";
 // import LocationMap from "../LocationMap";
 
 export default function CountryInfo() {
-    const [country, setCountry] = useState({})
+    const [country, setCountry] = useState([{}])
     const [countryError, setCountryError] = useState(null)
 
     useEffect(() => {
@@ -19,7 +19,8 @@ export default function CountryInfo() {
             })
             .then((data) => {
                 console.log(data);
-                setGlobalState('countryInfo', data)
+                setCountry(data)
+                // setGlobalState('countryInfo', data)
             })
             .catch((error) =>
                 setCountryError("Failed to retrieve this country info, please try again later")
@@ -33,11 +34,11 @@ export default function CountryInfo() {
                     <div className={classes.info}>
                         <p>
                             <span className={classes.bold}>Flag: </span>
-                            {setCountry?.name.official}
+                            {country?.flags?.svg}
                         </p>
                         <p>
-                            <span className={classes.bold}>Country<i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i>: </span>
-                            {country?.isp}
+                            <span className={classes.bold}>Country</span>
+                            {country?.name?.official}
                         </p>
                         <p>
                             <span className={classes.bold}>Region: </span>
