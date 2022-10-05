@@ -8,7 +8,7 @@ export default function CountryInfo() {
     const [countryError, setCountryError] = useState(null)
 
     useEffect(() => {
-        fetch("https://restcountries.com/v3.1/all")
+        fetch("https://restcountries.com/v3.1/region/europe")
             .then((res) => {
                 if (res.ok) {
                 setCountryError(null)
@@ -32,15 +32,19 @@ export default function CountryInfo() {
                 <>
                     <div className={classes.info}>
                         <p>
-                            <span className={classes.bold}>Public IPv4 Address: </span>
+                            <span className={classes.bold}>Flag: </span>
                             {setCountry?.name.official}
                         </p>
                         <p>
-                            <span className={classes.bold}>Internet Service Provider: </span>
+                            <span className={classes.bold}>Country<i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i>: </span>
                             {country?.isp}
                         </p>
                         <p>
-                            <span className={classes.bold}>Location: </span>
+                            <span className={classes.bold}>Region: </span>
+                            {country?.location?.city}, {country?.location?.country}
+                        </p>
+                        <p>
+                            <span className={classes.bold}>Population size: </span>
                             {country?.location?.city}, {country?.location?.country}
                         </p>
                     </div>

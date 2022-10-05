@@ -27,7 +27,7 @@ export default function IpAddress() {
     }, [])
 
     return (
-        <div>
+       <div>
             {!httpError && (
                 <>
                     <div className={classes.info}>
@@ -50,6 +50,5 @@ export default function IpAddress() {
             
             {httpError && <p>{httpError}</p>}
         </div>
-    );
-};
+        )}
 
