@@ -1,24 +1,26 @@
 import IpAddress from "./components/IP/IpAddress";
-import Header from "./components/header/Header";
 // import LocationMap from "./components/LocationMap";
 import Card from "./UI/Card"
 import CountryInfo from "./components/IP/CountryInfo";
+import React from "react";
 
 function App() {
   return (
     <div className='flex flex-wrap'>
       <div className='basis-1/2 min-w-fit'>
-        <Card className='bg-white'>
-        <h2>Your IP address is ...</h2>
+        <React.StrictMode>
+          <Card className='bg-white'>
+          <h2>Thanks for using us. Your IP address is ...</h2>
           <IpAddress />
         </Card>
       <Card className='bg-white'>
           <h2>Your Country information is ...</h2>
           <CountryInfo />
-      </Card>
+          </Card>
+          </React.StrictMode>
       </div>
       <div className='basis-1/2 p-4'>
-        <h3 className='bg-white mt-4 h-full p-4'>Our map</h3>
+        <h3 className='bg-white m-auto mt-4 h-full p-1 rounded-lg'>Where are you?</h3>
       </div>
     </div>
   );

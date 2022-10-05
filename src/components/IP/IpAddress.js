@@ -19,6 +19,7 @@ export default function IpAddress() {
             })
             .then((data) => {
                 console.log(data);
+                setIpAddressDict(data)
                 setGlobalState('ipAddress', data)
             })
             .catch((error) =>
@@ -27,9 +28,9 @@ export default function IpAddress() {
     }, [])
 
     return (
-        <div>
+       <div>
             {!httpError && (
-                <>
+                // <>
                     <div className={classes.info}>
                         <p>
                             <span className={classes.bold}>Public IPv4 Address: </span>
@@ -44,12 +45,11 @@ export default function IpAddress() {
                             {ipAddressDict?.location?.city}, {ipAddressDict?.location?.country}
                         </p>
                     </div>
-                </>
+                // </>
                 
             )}
             
             {httpError && <p>{httpError}</p>}
         </div>
-    );
-};
+        )}
 

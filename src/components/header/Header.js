@@ -2,7 +2,7 @@ export default function Header() {
 
     return (
         
-<header className="flex bg-white flex-wrap items-center justify-between p-4 mt-4">
+<header className="flex bg-white flex-wrap items-center justify-center p-6 mt-0">
     <div className="lg:order-2 w-auto lg:text-center">
         <h1 className="text-xl text-gray-800 font-semibold font-heading">
             What's my IP?

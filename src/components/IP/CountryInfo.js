@@ -1,14 +1,29 @@
 import { useEffect, useState } from "react";
-import { setGlobalState } from "../State";
+import { setGlobalState, useGlobalState } from "../State";
 import classes from "./IpAddress.module.css";
 // import LocationMap from "../LocationMap";
 
 export default function CountryInfo() {
-    const [country, setCountry] = useState({})
+    const [country, setCountry] = useState([])
     const [countryError, setCountryError] = useState(null)
+    const countryIp = useGlobalState('ipAddress')
+    const countryInfo = useGlobalState('countryInfo')
+    console.log(countryIp);
+
+    let foundCountry = {}
 
     useEffect(() => {
-        fetch("https://restcountries.com/v3.1/all")
+        if (country.length > 0) {
+            foundCountry = country.find(item => item.cca2 === countryIp[0].location.country)
+            console.log(foundCountry);
+        setGlobalState('countryInfo', foundCountry)
+        }
+       
+    }, [country])
+
+    useEffect(() => {
+       
+        fetch("https://restcountries.com/v3.1/region/europe")
             .then((res) => {
                 if (res.ok) {
                 setCountryError(null)
@@ -18,29 +33,39 @@ export default function CountryInfo() {
             }
             })
             .then((data) => {
-                console.log(data);
-                setGlobalState('countryInfo', data)
+            console.log(data);
+            setCountry(data)   
+                // setGlobalState('countryInfo', data.find((item) => item.altSpellings[0] === countryIp.location.country))
+                console.log(countryIp);
+                
+                // setGlobalState(foundCountry, )
+            console.log('This is the country:', foundCountry);
             })
             .catch((error) =>
                 setCountryError("Failed to retrieve this country info, please try again later")
-            );
+        );
     }, [])
 
+    console.log(countryInfo);
     return (
         <div>
             {!countryError && (
                 <>
                     <div className={classes.info}>
                         <p>
-                            <span className={classes.bold}>Public IPv4 Address: </span>
-                            {setCountry?.name.official}
+                            <span className={classes.bold}>Flag: </span>
+                            {countryInfo[0]?.flags?.svg}
                         </p>
                         <p>
-                            <span className={classes.bold}>Internet Service Provider: </span>
-                            {country?.isp}
+                            <span className={classes.bold}>Country</span>
+                            {countryInfo[0]?.name?.official}
                         </p>
                         <p>
-                            <span className={classes.bold}>Location: </span>
+                            <span className={classes.bold}>Region: </span>
+                            {country?.location?.city}, {country?.location?.country}
+                        </p>
+                        <p>
+                            <span className={classes.bold}>Population size: </span>
                             {country?.location?.city}, {country?.location?.country}
                         </p>
                     </div>

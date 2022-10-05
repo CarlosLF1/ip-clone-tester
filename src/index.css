@@ -11,13 +11,13 @@
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  background: url('https://source.unsplash.com/1L71sPT5XKc');
+  height: 100%;
+  background-image: url('/public/planetpic.jpg');
   color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background-repeat: inherit;
+  background-repeat:repeat;
 }
 
