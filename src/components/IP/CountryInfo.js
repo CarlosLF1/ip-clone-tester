@@ -57,16 +57,20 @@ export default function CountryInfo() {
                             {countryInfo[0]?.flags?.svg}
                         </p>
                         <p>
-                            <span className={classes.bold}>Country</span>
+                            <span className={classes.bold}>Country: </span>
                             {countryInfo[0]?.name?.official}
                         </p>
                         <p>
                             <span className={classes.bold}>Region: </span>
-                            {country?.location?.city}, {country?.location?.country}
+                            {countryInfo[0]?.region}
                         </p>
                         <p>
                             <span className={classes.bold}>Population size: </span>
-                            {country?.location?.city}, {country?.location?.country}
+                            {countryInfo[0]?.population}
+                        </p>
+                         <p>
+                            <span className={classes.bold}>Timezone: </span>
+                            {countryInfo[0]?.timezones}
                         </p>
                     </div>
                 </>
