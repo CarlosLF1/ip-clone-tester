@@ -2,9 +2,15 @@ import IpAddress from "./components/IP/IpAddress";
 // import LocationMap from "./components/LocationMap";
 import Card from "./UI/Card"
 import CountryInfo from "./components/IP/CountryInfo";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 
 import Map from "./components/Map/Map"
+import MyGlobe from "./components/Map/Globe"
+import { Canvas } from "@react-three/fiber";
+import styled from "styled-components";
+
+
+const CanvasContainer = styled.div`width:100%  height:100%`
 
 function App() {
 
@@ -62,7 +68,17 @@ function App() {
 
 
   return (
-    <div className='flex flex-row flex-wrap rounded-lg'>
+    <div className='flex flex-row flex-wrap rounded-lg bg-black'>
+        <div className="h-100%">
+               <CanvasContainer>
+                    <Canvas>
+                        <Suspense fallback={null}>
+                            <MyGlobe x={30} y={30} />    
+                        </Suspense>
+                    </Canvas>
+
+                 </CanvasContainer>
+       </div>
 {      <div className='basis-1/2 flex-row min-w-fit'>
         <React.StrictMode>
           <Card className='bg-white'>
