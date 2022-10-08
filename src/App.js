@@ -7,7 +7,9 @@ import styles from './App.css';
 import MyGlobe from "./components/Map/Globe";
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
-import Map from "./components/Map/Map"
+
+
+const CanvasContainer = styled.div`width:100%  height:100%`
 
 const CanvasContainer = styled.div`width:100%  height:50%`
 
@@ -69,6 +71,7 @@ function App() {
 
 
   return (
+  
     <div className='card bg-black flex flex-row flex-wrap rounded-lg'>
        <div className="bg-wrapper fixed inset-0" id="bg-globe">
                <CanvasContainer>
@@ -78,6 +81,7 @@ function App() {
                         </Suspense>
                     </Canvas>
 
+
               </CanvasContainer>
       </div>
       
@@ -86,6 +90,7 @@ function App() {
          <React.StrictMode>
           <Card className=''>
             <h2 className='font-bold text-blue-300'>Thanks for using us. Your IP address is ...</h2>
+
             <br></br>
             <IpAddress ipAddressDict={ipAddressDict}/>
           </Card>

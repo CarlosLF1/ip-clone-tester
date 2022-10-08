@@ -37,6 +37,7 @@ import React, {
     const [target, setTarget] = useState([props.x, props.y])
 
     useEffect(()=>{
+
       // console.log("pos, target and earth", pos, target, earthRef.current.rotation.x, earthRef.current.rotation.y)
       calcStep(pos[0],pos[1], target[0], target[1])
       // console.log ("pppppp", earthRef.current)
@@ -47,17 +48,20 @@ import React, {
       const stepx = (tx-cx)>0?(tx-cx)/100:-(tx-cx)/100;
       const stepy = (ty-cy)>0?(ty-cy)/100:-(ty-cy)/100;
       // console.log ("difference x y",stepx, stepy)
+
       setStep ([stepx, stepy]) 
     }
     
 
     
     useFrame(({clock})=>{
+
       // console.log("pos step target", pos, step, target)
       // console.log("earthREFFFFF", earthRef)
 
         const elapsedTime = clock.getElapsedTime();
         // console.log("earth Info 1 ", earthRef.current.rotation.x)
+
         earthRef.current.rotation.y=elapsedTime/6
        
     } )
@@ -70,7 +74,7 @@ import React, {
       <Stars
         radius={300}
         depth={60}
-        count={20000}
+        count={10000}
         factor={7}
         saturation={0}
         fade={true}
