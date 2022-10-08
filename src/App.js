@@ -2,9 +2,16 @@ import IpAddress from "./components/IP/IpAddress";
 // import LocationMap from "./components/LocationMap";
 import Card from "./UI/Card"
 import CountryInfo from "./components/IP/CountryInfo";
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, Suspense } from "react";
+import styles from './App.css';
+import MyGlobe from "./components/Map/Globe";
+import { Canvas } from "@react-three/fiber";
+import styled from "styled-components";
 import Map from "./components/Map/Map"
+
+const CanvasContainer = styled.div`width:100%  height:100%`
+
+
 
 function App() {
 
@@ -36,7 +43,7 @@ function App() {
              } else { setCountryError("Failed to retrieve this country info, please try again later")}
             })
         .then((data) => {
-            console.log("countries:",data);
+            // console.log("countries:",data);
             setCountries(data)   
         })
         .catch((error) =>
@@ -52,7 +59,7 @@ function App() {
             } else { setIPError("Failed to retrieve IP Address, please try again later")}
           })
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             setIpAddressDict(data)   
           })
         .catch((error) =>
@@ -62,8 +69,18 @@ function App() {
 
 
   return (
-    <div className='flex flex-row flex-wrap rounded-lg'>
-{      <div className='basis-1/2 flex-row min-w-fit'>
+    <div className='card flex flex-row flex-wrap rounded-lg'>
+       <div className="bg-wrapper fixed inset-0" id="bg-globe">
+               <CanvasContainer>
+                    <Canvas>
+                        <Suspense fallback={null}>
+                            <MyGlobe x={30} y={30} />    
+                        </Suspense>
+                    </Canvas>
+
+                 </CanvasContainer>
+            </div>
+{      <div className='overlay-content flex-row min-w-fit'>
         <React.StrictMode>
           <Card className='bg-white'>
             <h2 className='font-bold text-blue-700'>Thanks for using us. Your IP address is ...</h2>
@@ -78,11 +95,12 @@ function App() {
           </Card>
           </React.StrictMode>
       </div>}
-      <div className='basis-1/2 min-w-fit'>
+      <div className='min-w-fit'>
           <Card className='bg-white'>
             <Map country={country} ipAddressDict ={ipAddressDict}/>
           </Card>
       </div>
+      
     </div>
   );
 }

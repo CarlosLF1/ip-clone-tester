@@ -1,5 +1,39 @@
+/* #whole-page {
+    background: img src(#bg-globe);
+} */
+
 .leaflet-container {
-    width: 40%;
+    width: 90%;
     height: 55vh;
+    margin: 2px;
 }
 
+/* .card {
+    position: relative;
+    width: 245px;
+    height: 325px;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.bg-wrapper {
+    position: absolute;
+    z-index: 0;
+}
+
+.overlay-content {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+} */
+
+/* .text {
+    width: 90%;
+    margin-top: 135px;
+    height: 80px;
+    padding: 5%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+} */

@@ -4,7 +4,7 @@ import classes from "./IpAddress.module.css";
 
 export default function IpAddress({ipAddressDict}) {
 
-  console.log ("ip render:",ipAddressDict)
+//   console.log ("ip render:",ipAddressDict)
     return (
        <div>
             <div className={classes.info}>

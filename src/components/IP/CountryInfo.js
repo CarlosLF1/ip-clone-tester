@@ -4,7 +4,7 @@ import classes from "./IpAddress.module.css";
 
 export default function CountryInfo({countryInfo}) {
 
-    console.log("country", countryInfo);
+    // console.log("country", countryInfo);
     return (
         <div>
                     <div className={classes.info}>
