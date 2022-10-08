@@ -1,5 +1,19 @@
+/* #whole-page {
+    background: img src(#bg-globe);
+} */
+
 .leaflet-container {
-    width: 40%;
+    width: 100%;
     height: 55vh;
+    margin: 2px;
 }
+#bg-globe {
+    z-index: 0;
+
+}
+
+#ipApp-container {
+    z-index: 1;
+}
+
 

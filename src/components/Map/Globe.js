@@ -37,15 +37,17 @@ import React, {
     const [target, setTarget] = useState([props.x, props.y])
 
     useEffect(()=>{
-  
-      calcStep(pos[0],pos[1], target[0], target[1])
 
+      // console.log("pos, target and earth", pos, target, earthRef.current.rotation.x, earthRef.current.rotation.y)
+      calcStep(pos[0],pos[1], target[0], target[1])
+      // console.log ("pppppp", earthRef.current)
     }, [])
    
     function calcStep (cx, cy, tx, ty){
-
+      // console.log ("parameters pos, target",cx,cy, tx, ty)
       const stepx = (tx-cx)>0?(tx-cx)/100:-(tx-cx)/100;
       const stepy = (ty-cy)>0?(ty-cy)/100:-(ty-cy)/100;
+      // console.log ("difference x y",stepx, stepy)
 
       setStep ([stepx, stepy]) 
     }
@@ -54,7 +56,11 @@ import React, {
     
     useFrame(({clock})=>{
 
+      // console.log("pos step target", pos, step, target)
+      // console.log("earthREFFFFF", earthRef)
+
         const elapsedTime = clock.getElapsedTime();
+        // console.log("earth Info 1 ", earthRef.current.rotation.x)
 
         earthRef.current.rotation.y=elapsedTime/6
        

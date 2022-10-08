@@ -4,9 +4,9 @@
     align-items: center;
     justify-content: center;
     padding: 4rem;
-    background: white;
-    width: 80%;
+    background: transparent;
+    width: 100%;
     margin: 0 auto;
-    margin-top: 1rem;
     border-radius: 5px;
+    color: white;
 }

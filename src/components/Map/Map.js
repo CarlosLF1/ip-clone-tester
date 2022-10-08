@@ -26,7 +26,7 @@ export default function Map({country, ipAddressDict }) {
                 <LeafletMap ipAddressDict={ipAddressDict} country={country} />
                 }
             </div>
-            <div className="h-100%">
+            {/* <div className="absolute inset-0">
                <CanvasContainer>
                     <Canvas>
                         <Suspense fallback={null}>
@@ -35,7 +35,7 @@ export default function Map({country, ipAddressDict }) {
                     </Canvas>
 
                  </CanvasContainer>
-            </div>
+            </div> */}
         </div>
         : <p>Loading...</p>
     )

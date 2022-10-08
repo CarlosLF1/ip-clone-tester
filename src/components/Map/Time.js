@@ -1,9 +1,9 @@
 import React from 'react';
 
 
-export default function Time() {
+export default function Time(props) {
   
   return (
-    <p>Hello Time</p>
+    <p>Your current time is:{props.ipAddressDict?.location?.timezone}</p>
   )
 }
