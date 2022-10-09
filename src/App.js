@@ -7,11 +7,11 @@ import styles from './App.css';
 import MyGlobe from "./components/Map/Globe";
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
+import Map from "./components/Map/Map"
 
 
 const CanvasContainer = styled.div`width:100%  height:100%`
 
-const CanvasContainer = styled.div`width:100%  height:50%`
 
 
 
@@ -53,6 +53,8 @@ function App() {
         );
     }, [])
 
+  
+  
   useEffect(() => {
     fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_7PXxkzTdM5XYM8e7GXtTRlynd5Lhk&ipAddress=")
         .then((res) => {
@@ -69,7 +71,7 @@ function App() {
       );
     }, [])
 
-
+    console.log("IP Info:", ipAddressDict)
   return (
   
     <div className='card bg-black flex flex-row flex-wrap rounded-lg'>
@@ -77,7 +79,7 @@ function App() {
                <CanvasContainer>
                     <Canvas>
                         <Suspense fallback={null}>
-                            <MyGlobe x={30} y={30} />    
+                            <MyGlobe x={ipAddressDict?.location?.lat} y={ipAddressDict?.location?.lng} flag={country?.flags?.png}/>    
                         </Suspense>
                     </Canvas>
 
@@ -92,13 +94,13 @@ function App() {
             <h2 className='font-bold text-blue-300'>Thanks for using us. Your IP address is ...</h2>
 
             <br></br>
-            <IpAddress ipAddressDict={ipAddressDict}/>
+            <IpAddress ipAddressDict={ipAddressDict} />
           </Card>
         
           <Card className='opacity-2'>
             <h2 className='font-bold text-blue-300'>Your Country information is ...</h2>
             <br></br>
-            <CountryInfo countryInfo={country}/>
+            <CountryInfo countryInfo={country} />
           </Card>
           </React.StrictMode>
         </div>
