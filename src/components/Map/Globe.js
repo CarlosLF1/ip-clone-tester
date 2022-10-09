@@ -8,9 +8,11 @@ import React, {
     Suspense
   } from "react";
 
+  import { useSpring, a } from "@react-spring/three";
+
   import { Canvas, useFrame, useLoader } from "@react-three/fiber";
   import styled from "styled-components";
-  import { TextureLoader  } from "three";
+  import { MeshStandardMaterial, TextureLoader,vertex  } from "three";
 
   import EarthDayMap from "../img/earth-large.jpg"
   import EarthNormalMap from "../img/earth-large.jpg"
@@ -20,74 +22,81 @@ import React, {
   import * as THREE from "three";
   
   import "./styles.css";
-  import { OrbitControls, Stars } from "@react-three/drei";
+  import {Stars, OrbitControls} from "@react-three/drei";
 
-  export default function MyGlobe(props) {
+  
+  export default function MyGlobe({x,y,flag}) {
 
-
-    
     const [colorMap, normalMap, specularMap, cloudMap] = useLoader(
       TextureLoader,
        [EarthDayMap, EarthNormalMap, EarthSpecularMap, EarthCloudMap])
    
     const earthRef = useRef();
+    const userRef = useRef();
+    const [ringR, setRingR] = useState(0.05)
     
-    const [pos, setPos]   = useState([0,0])
-    const [step, setStep] = useState([0,0])
-    const [target, setTarget] = useState([props.x, props.y])
+    //change lat, lon coordinates to degrees
+    const [ringL, setRingL]=useState([x?x*Math.PI/180:0, y?(y+90)*Math.PI/180:0, 2.51])
+
+   
+     useEffect(()=>{
+      console.log("useEffect",ringL)
+
+      
+      const interval = setInterval(() => {
+       calcRing();
+      }, 50);
+     
+      return () => clearInterval(interval);
+    },[])
 
     useEffect(()=>{
-
-      // console.log("pos, target and earth", pos, target, earthRef.current.rotation.x, earthRef.current.rotation.y)
-      calcStep(pos[0],pos[1], target[0], target[1])
-      // console.log ("pppppp", earthRef.current)
-    }, [])
+      setRingL([x?x*Math.PI/180:0, y?(y+90)*Math.PI/180:0, 2.51])
+      earthRef.current.rotation.y=-ringL[1]
+      earthRef.current.rotation.x=ringL[0]
+    })
    
-    function calcStep (cx, cy, tx, ty){
-      // console.log ("parameters pos, target",cx,cy, tx, ty)
-      const stepx = (tx-cx)>0?(tx-cx)/100:-(tx-cx)/100;
-      const stepy = (ty-cy)>0?(ty-cy)/100:-(ty-cy)/100;
-      // console.log ("difference x y",stepx, stepy)
+   // console.log("x-y:", x, y, ringL)
+    
+  /*   useFrame(({ringR})=>{
+      const a=1
+    })
+   */
 
-      setStep ([stepx, stepy]) 
+    function calcRing(){
+      const myrandom = Math.random()/20
+      setRingR(0.05+myrandom)
+      
     }
-    
 
-    
-    useFrame(({clock})=>{
+/*     const {rotation} = useSpring ({
+     rotation : [x?x*Math.PI/180:0, y?(y+90)*Math.PI/180:0, 2.51] 
+    }) */
 
-      // console.log("pos step target", pos, step, target)
-      // console.log("earthREFFFFF", earthRef)
-
-        const elapsedTime = clock.getElapsedTime();
-        // console.log("earth Info 1 ", earthRef.current.rotation.x)
-
-        earthRef.current.rotation.y=elapsedTime/6
-       
-    } )
-    
-       
     return (
       <>
       {/* <ambientLight intensity={1} /> */}
-      <pointLight color="#f6f3ea" position={[1, 0, -5]} intensity={1.0} />
+      <pointLight color="#f6f3ea" position={[0, 2, 5]} intensity={1.0} />
+      <pointLight color="#f6f3ea" position={[0, 2, -5]} intensity={1.0} />
       <Stars
-        radius={300}
+        radius={400}
         depth={60}
-        count={10000}
+        count={30000}
         factor={7}
         saturation={0}
         fade={true}
+        autoRotate={true}
       />
 
-      <mesh ref={earthRef} position={[0, 0, -3]}>
-        <sphereGeometry args={[4, 32, 32]} />
+      <a.mesh ref={earthRef} position={[0,0,0]}>
+        <sphereGeometry args={[2.5, 32, 32]} />
         <meshPhongMaterial specularMap={specularMap} />
         <meshStandardMaterial
           map={colorMap}
           normalMap={normalMap}
-          metalness={0.4}
+          metalness={0.1}
           roughness={0.7}
+          
         />
         { <OrbitControls
           enableZoom={true}
@@ -95,8 +104,15 @@ import React, {
           enableRotate={true}
           zoomSpeed={0.6}
           panSpeed={0.5}
-          rotateSpeed={0.4}
+          autoRotate={true}
+          rotateSpeed={2}
+       
+          
         /> }
+      </a.mesh>
+      <mesh ref={userRef} position={[0,0,2.53]}>
+        <ringGeometry args={[ringR, ringR+0.03, 30]} />
+        <meshStandardMaterial color={'red'} />
       </mesh>
     </>
 
