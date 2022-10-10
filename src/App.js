@@ -64,8 +64,9 @@ function App() {
         } else { setIPError("Failed to retrieve IP Address, please try again later")}
       })
     .then((data) => {
-        // console.log(data);
-        setIpAddressDict(data)   
+        if (data?.latitude) {
+        setIpAddressDict(data)
+        } else alert ("IP is not searchable") 
       })
     .catch((error) =>
     setIPError("Failed to retrieve IP Address, please try again later")
@@ -75,6 +76,13 @@ function App() {
   useEffect(() => {
     findIP('')
     }, [])
+
+  function handleClick(){
+    console.log("10.10.10.10 ip searching")
+    findIP("8.8.8.8")
+
+  }
+
 
   console.log("IP Info:", ipAddressDict)
   return (
@@ -111,8 +119,9 @@ function App() {
         </div>
             
         <div className='basis-1/4'>
-        </div>
 
+        </div>
+            <button onClick={handleClick} >click me</button>
         <div className='basis-1/2'>
           <Card className='bg-white'>
             <Map country={country} ipAddressDict ={ipAddressDict}/>
