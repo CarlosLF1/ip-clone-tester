@@ -8,7 +8,7 @@ import MyGlobe from "./components/Map/Globe";
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
 import Map from "./components/Map/Map"
-
+import { useParams } from "react-router-dom";
 
 const CanvasContainer = styled.div`width:100%  height:100%`
 
@@ -17,11 +17,14 @@ const CanvasContainer = styled.div`width:100%  height:100%`
 
 function App() {
 
+  let { ipSearch } = useParams()
+
   const [ipAddressDict, setIpAddressDict] = useState()
   const [IPError, setIPError] = useState("Loading")
   const [countryError, setCountryError] = useState("Loading")
   const [countries, setCountries] = useState([])
   const [country, setCountry] = useState()
+  const [ip, setIp] = useState(ipSearch)
  
   let foundCountry
 
@@ -30,7 +33,7 @@ function App() {
     console.log ("IP and countries ready:", countries.length, JSON.stringify(ipAddressDict))
     if (countries.length>0 && ipAddressDict) {
        
-        foundCountry = countries.find(item => item.cca2 === ipAddressDict.location.country)
+        foundCountry = countries.find(item => item.cca2 === ipAddressDict.country_code)
         
         setCountry(foundCountry)
     }
@@ -53,25 +56,27 @@ function App() {
         );
     }, [])
 
-  
+  function findIP (myIp){
+    fetch("https://ipwho.is/".concat(myIp))
+    .then((res) => {
+        if (res.ok) {
+        return res.json();
+        } else { setIPError("Failed to retrieve IP Address, please try again later")}
+      })
+    .then((data) => {
+        // console.log(data);
+        setIpAddressDict(data)   
+      })
+    .catch((error) =>
+    setIPError("Failed to retrieve IP Address, please try again later")
+  );
+  }
   
   useEffect(() => {
-    fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_7PXxkzTdM5XYM8e7GXtTRlynd5Lhk&ipAddress=")
-        .then((res) => {
-            if (res.ok) {
-            return res.json();
-            } else { setIPError("Failed to retrieve IP Address, please try again later")}
-          })
-        .then((data) => {
-            // console.log(data);
-            setIpAddressDict(data)   
-          })
-        .catch((error) =>
-        setIPError("Failed to retrieve IP Address, please try again later")
-      );
+    findIP('')
     }, [])
 
-    console.log("IP Info:", ipAddressDict)
+  console.log("IP Info:", ipAddressDict)
   return (
   
     <div className='card bg-black flex flex-row flex-wrap rounded-lg'>
@@ -79,7 +84,7 @@ function App() {
                <CanvasContainer>
                     <Canvas>
                         <Suspense fallback={null}>
-                            <MyGlobe x={ipAddressDict?.location?.lat} y={ipAddressDict?.location?.lng} flag={country?.flags?.png}/>    
+                            <MyGlobe x={ipAddressDict?.latitude} y={ipAddressDict?.longitude} flag={country?.flags?.png}/>    
                         </Suspense>
                     </Canvas>
 

@@ -8,7 +8,7 @@ export default function LeafletMap({ipAddressDict, country}) {
 
   //const [sdata, setSdata] = useState(ipAddressDict);
   
-  const [coords, setCoords] = useState([ipAddressDict.location.lat, ipAddressDict.location.lng]);
+  const [coords, setCoords] = useState([ipAddressDict.latitude, ipAddressDict.longitude]);
 
   console.log('LeafletMap', ipAddressDict, country, coords)
 
@@ -35,7 +35,7 @@ export default function LeafletMap({ipAddressDict, country}) {
             
         <Marker position={coords} icon= {iconimg} >
             <Popup >
-                {ipAddressDict.location.city} <br /> {ipAddressDict.location.timezone}
+                {ipAddressDict?.region} <br /> {ipAddressDict?.timezone.current_time}
             </Popup>
         </Marker>
    

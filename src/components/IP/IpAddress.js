@@ -14,11 +14,11 @@ export default function IpAddress({ipAddressDict}) {
                 </p>
                 <p>
                     <span className={classes.bold}>Internet Service Provider: </span>
-                    {ipAddressDict?.isp}
+                    {ipAddressDict?.connection.isp}
                 </p>
                 <p>
                     <span className={classes.bold}>Location: </span>
-                    {ipAddressDict?.location?.city}, {ipAddressDict?.location?.country}
+                    {ipAddressDict?.region}, {ipAddressDict?.country}
                 </p>
             </div>
         </div>
