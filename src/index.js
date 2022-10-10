@@ -13,7 +13,7 @@ root.render(
   <BrowserRouter>
       <Header />
         <Routes>
-         <Route path='/' element={<App />} />
+         <Route path='/:ipSearch' element={<App />} />
         </Routes>
       <Footer />
   </BrowserRouter>
