@@ -78,11 +78,17 @@ function App() {
     }, [])
 
   function handleClick(){
+
     console.log("10.10.10.10 ip searching")
     findIP("8.8.8.8")
 
   }
 
+  function handleIP(ip){
+    console.log("ip searching")
+  
+    findIP(ip)
+  }
 
   console.log("IP Info:", ipAddressDict)
   return (
@@ -107,7 +113,7 @@ function App() {
             <h2 className='font-bold text-blue-300'>Thanks for using us. Your IP address is ...</h2>
 
             <br></br>
-            <IpAddress ipAddressDict={ipAddressDict} />
+            <IpAddress ipAddressDict={ipAddressDict} cb={handleIP} />
           </Card>
         
           <Card className='opacity-2'>
@@ -121,7 +127,6 @@ function App() {
         <div className='basis-1/4'>
 
         </div>
-            <button onClick={handleClick} >click me</button>
         <div className='basis-1/2'>
           <Card className='bg-white'>
             <Map country={country} ipAddressDict ={ipAddressDict}/>
