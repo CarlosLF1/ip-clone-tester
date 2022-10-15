@@ -12,9 +12,7 @@ root.render(
   
   <BrowserRouter>
       <Header />
-        <Routes>
-         <Route path='/' element={<App />} />
-        </Routes>
+         <App />
       <Footer />
   </BrowserRouter>
   

@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     console.log("IP and countries ready:", countries.length, JSON.stringify(ipAddressDict))
     if (countries.length>0 && ipAddressDict) {
-      fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true`)
+      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${ipAddressDict?.latitude}&longitude=${ipAddressDict?.longitude}&current_weather=true`)
         .then((res) => {
           if (res.ok) {
             return res.json();
