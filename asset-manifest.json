@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/ip-clone-tester/static/css/main.f3e3df23.css",
-    "main.js": "/ip-clone-tester/static/js/main.63fee2d7.js",
+    "main.js": "/ip-clone-tester/static/js/main.fa14d168.js",
     "static/media/earth-large.jpg": "/ip-clone-tester/static/media/earth-large.b1a1ed4fe0a37d45b0cd.jpg",
     "index.html": "/ip-clone-tester/index.html",
     "main.f3e3df23.css.map": "/ip-clone-tester/static/css/main.f3e3df23.css.map",
-    "main.63fee2d7.js.map": "/ip-clone-tester/static/js/main.63fee2d7.js.map"
+    "main.fa14d168.js.map": "/ip-clone-tester/static/js/main.fa14d168.js.map"
   },
   "entrypoints": [
     "static/css/main.f3e3df23.css",
-    "static/js/main.63fee2d7.js"
+    "static/js/main.fa14d168.js"
   ]
 }
