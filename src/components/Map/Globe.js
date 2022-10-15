@@ -89,7 +89,7 @@ import React, {
       />
 
       <a.mesh ref={earthRef} position={[0,0,0]}>
-        <sphereGeometry args={[2.5, 32, 32]} />
+        <sphereGeometry args={[2.5, 30, 30]} />
         <meshPhongMaterial specularMap={specularMap} />
         <meshStandardMaterial
           map={colorMap}
