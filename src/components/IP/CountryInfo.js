@@ -2,15 +2,15 @@
 import classes from "./IpAddress.module.css";
 
 
-export default function CountryInfo({countryInfo}) {
+export default function CountryInfo({countryInfo, weather}) {
 
     // console.log("country", countryInfo);
     return (
         <div>
                     <div className={classes.info}>
                         <p>
-                            <span className={classes.bold}>Flag: </span>
-                            {countryInfo?.flags?.svg}
+                    <span className={classes.bold}>Current temperature:</span>
+                    {weather?.current_weather?.temperature}
                         </p>
                         <p>
                             <span className={classes.bold}>Country: </span>

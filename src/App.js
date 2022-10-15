@@ -25,14 +25,25 @@ function App() {
   const [countries, setCountries] = useState([])
   const [country, setCountry] = useState()
   const [ip, setIp] = useState(ipSearch)
+  const [weatherError, setWeatherError] = useState("Finding weather")
  
   let foundCountry
 
+  const [weather, setWeather] = useState()
 
   useEffect(() => {
-    console.log ("IP and countries ready:", countries.length, JSON.stringify(ipAddressDict))
+    console.log("IP and countries ready:", countries.length, JSON.stringify(ipAddressDict))
     if (countries.length>0 && ipAddressDict) {
-       
+      fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true`)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+        } else { setWeatherError("Your weather is so bad we cant find it.")}
+        })
+        .then((data) => {
+          setWeather(data)
+          console.log(data);
+      })
         foundCountry = countries.find(item => item.cca2 === ipAddressDict.country_code)
         
         setCountry(foundCountry)
@@ -107,28 +118,28 @@ function App() {
       </div>
       
       <div className='flex flex-row' id='ipApp-container'>
-        <div className='basis-1/4 overlay-content flex flex-col'>
+        <div className='basis-1/2 overlay-content flex flex-col'>
          <React.StrictMode>
-          <Card className=''>
+          <Card className='bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
             <h2 className='font-bold text-blue-300'>Thanks for using us. Your IP address is ...</h2>
 
             <br></br>
             <IpAddress ipAddressDict={ipAddressDict} cb={handleIP} />
           </Card>
         
-          <Card className='opacity-2'>
+          <Card className='bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
             <h2 className='font-bold text-blue-300'>Your Country information is ...</h2>
             <br></br>
-            <CountryInfo countryInfo={country} />
+            <CountryInfo countryInfo={country} weather={weather} />
           </Card>
           </React.StrictMode>
         </div>
             
-        <div className='basis-1/4'>
+        {/* <div className='basis-1/4'>
 
-        </div>
-        <div className='basis-1/2'>
-          <Card className='bg-white'>
+        </div> */}
+        <div className='basis-1/2 rounded'>
+          <Card className='bg-white rounded'>
             <Map country={country} ipAddressDict ={ipAddressDict}/>
           </Card>
         </div>

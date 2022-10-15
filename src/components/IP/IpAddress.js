@@ -16,19 +16,19 @@ export default function IpAddress({ipAddressDict, cb}) {
     return (
        <div>
             <div className={classes.info}>
-                <p>
+                <div>
                     <span className={classes.bold}>Public IPv4 Address: </span>
                     <div className='flex flex-row searchbox'>
                         <input 
                             className='w-[140px]'
-                            type="text" 
-                            defaultValue={ipAddressDict?.ip} 
-                            onChange={(e)=>{setIp(e.target.value)}}
-                            STYLE={"background-color:transparent"} 
+                            type="text"
+                            defaultValue={ipAddressDict?.ip}
+                            onChange={(e) => { setIp(e.target.value) }}
+                            style={{background:"transparent"}}
                         />
                         <BiSearchAlt className='icon' onClick={handleClick}/>
                     </div>
-                </p>
+                </div>
                 <p>
                     <span className={classes.bold}>Internet Service Provider: </span>
                     {ipAddressDict?.connection.isp}
