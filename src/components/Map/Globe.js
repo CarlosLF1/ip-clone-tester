@@ -89,7 +89,7 @@ import React, {
       />
 
       <a.mesh ref={earthRef} position={[0,0,0]}>
-        <sphereGeometry args={[2.5, 30, 30]} />
+        <sphereGeometry args={[2.5, 32, 32]} />
         <meshPhongMaterial specularMap={specularMap} />
         <meshStandardMaterial
           map={colorMap}
@@ -105,7 +105,7 @@ import React, {
           zoomSpeed={0.6}
           panSpeed={0.5}
           autoRotate={true}
-          rotateSpeed={2}
+          rotateSpeed={1}
        
           
         /> }
